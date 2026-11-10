@@ -28,6 +28,19 @@
   <li>检查签署页授权与盖章是否完备</li>
   <li>检查争议解决方式（诉讼或仲裁）是否约定清楚</li>
 </ol>
-<p class="tip">本页面为教程演示项目，内容全部虚构，不代表任何真实合同或当事人。</p>
+<p class="tip">本页面为教程演示项目，内容全部虚构。</p>
+<button id="exportBtn">导出 Word</button>
+<script>
+  document.getElementById('exportBtn').addEventListener('click', function () {
+    var html = '<html xmlns:w="urn:schemas-microsoft-com:office:word">' +
+               document.documentElement.outerHTML + '</html>';
+    var blob = new Blob([html], { type: 'application/msword' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = '合同审查清单.doc';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+</script>
 </body>
 </html>
